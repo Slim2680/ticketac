@@ -10,8 +10,8 @@ var models = require('./routes/index')
 
 require('./models/connection');
 
-var app = express();
 
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
