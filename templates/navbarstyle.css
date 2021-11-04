@@ -1,0 +1,9 @@
+body{
+    background-image: linear-gradient(rgb(191, 218, 230), rgb(37, 150, 190));
+    height: 100vh;
+}
+
+.brand-name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2vh;
+}

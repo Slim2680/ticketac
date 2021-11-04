@@ -8,8 +8,8 @@ var options = {
 
 mongoose.connect('mongodb+srv://admin:doggito@cluster0.jcrjh.mongodb.net/ticketac?retryWrites=true&w=majority',
     options,
-    function(error) {
-        if (error){
+    function(err) {
+        if (err){
             console.log("Ooooops!! Error") ;
         } else {
             console.log("It's all GOOOOOD!!!!");
