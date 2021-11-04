@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta chartset = "UTF-8"/>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
@@ -9,8 +10,39 @@
     
   </head>
   <body>
-    <%- include('navbar'); %> 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+    <div class="container-fluid p-0">
+
+      <%- include('navbar'); %> 
+        <h1><%= title %></h1>
+        <p>Welcome to <%= title %></p>
+
+    <div class="d-flex">
+
+    <div class="row">
+          <div class="row justify-content-center">
+              <div class="col-11 col-lg-7">
+                <h2>One-way ticket :</h2>
+              </div>
+         </div>
+    </div>
+
+      <div class="row justify-content-center">
+        <div class= "col-12 col-lg6">
+          <form action="/trips" method="POST">
+            <div class="from-row">
+              <input name="departure" type="text" class="form-control" placeholder="From: Paris, Marseille...">
+            </div>
+        <div class="col" id="datepicker">
+            <input name="date" type="text" class="form-control" id="datepicker">
+        </div>
+            
+            <button id="btn-search" type="submit" class="btn btn-danger">Go</button>  
+    </div>
+       </div>
+          </form>
+        </div>
+      
+    </div>
   </body>
 </html>
