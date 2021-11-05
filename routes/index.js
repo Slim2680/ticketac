@@ -86,8 +86,14 @@ router.get('/trips', function(req, res, next) {
 // GET HOME PAGE
 
 router.get('/home', function(req, res, next) {
-
+//  console.log("Hellloooooooooo there!!!!!!")
   res.render('home')
 })
+
+// router.get('/notfound', function(req, res, next) {
+//   res.redirect('/home');
+//   res.render('notfound', { title: 'Express' });
+// }
+// );
 
 module.exports = router;

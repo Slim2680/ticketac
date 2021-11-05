@@ -11,40 +11,21 @@
     </head>
     <body>
         
-        <div class="container-fluid">
-
-            <!-- HEADER -->
-            <div class="row">
-
-                <nav class=" header col-12 navbar navbar-light bg-dark">
-                    <a class="navbar" href="/">
-                    <img src="/images/bike-logo.svg" width="50" height="50" class="logo" alt="">
-                    The Bike Shop Experience
-                    </a>
-                </nav>
-
-            </div>  
-
-            <!-- JUMBOTRON -->
-            <div class="row">
-
-                <div class="col-12 jumbotron jumbotron-fluid">
-                    <div class="container">
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-              <div class='col-12'>
-                  <h3>Oops!! it's been cancelled!</h3>
-              </div>
-                
-                
-            </div>
-            
-        </div>
         
+    <%- include('../partials/navbar'); %>
+          
+    <div class="container-fluid d-flex flex-column align-items-center">
+        <!-- HEADER -->
+        <div class="row">
+            <div class="col-12">
+             <p class="text-white h4 text-center">Oops, no train available</p>
+             <p class="text-white h4 text-center">Try another date !</p>
+             <div class="d-flex justify-content-center"><a href="/home" class="text-danger"><u>back to home page</u></a>
+            </div>
+         </div>
+        </div>
+    </div>
+     
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
