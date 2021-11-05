@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
+var userModel = require('../models/users')
+var travelModel = require('../models/travels')
+
 var journeySchema = mongoose.Schema({
   departure: String,
   arrival: String,
@@ -19,7 +22,7 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  res.render('login');
 });
 
 
@@ -50,38 +53,55 @@ router.get('/save', async function(req, res, next) {
     }
 
   }
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 
 // Cette route est juste une verification du Save.
 // Vous pouvez choisir de la garder ou la supprimer.
-router.get('/result', function(req, res, next) {
+// router.post('/result', function(req, res, next) {
 
-  // Permet de savoir combien de trajets il y a par ville en base
-  for(i=0; i<city.length; i++){
+//   // Permet de savoir combien de trajets il y a par ville en base
+//   for(i=0; i<city.length; i++){
 
-    journeyModel.find( 
-      { departure: city[i] } , //filtre
+//     journeyModel.find( 
+//       { departure: city[i] } , //filtre
   
-      function (err, journey) {
+//       function (err, journey) {
 
-          console.log(`Nombre de trajets au départ de ${journey[0].departure} : `, journey.length);
-      }
-    )
+//           console.log(`Nombre de trajets au départ de ${journey[0].departure} : `, journey.length);
+//       }
+//     )
 
-  }
+//   }
 
+router.post('/result', async function(req, res, next) {
 
-  res.render('index', { title: 'Express' });
+    req.session.from = req.body.from
+  var Sfrom = req.session.from
+    req.session.to = req.body.to
+  var Sto = req.session.to
+    req.session.date = req.body.date
+  var Sdate = req.session.date
+
+  var travelsAvailable = await travelModel.find({
+    departure: Sfrom,
+    arrival: Sto,
+    date: Sdate
+  })
+
+  res.render('trips', {travelsAvailable});
 });
 
-// GET TRIPS PAGE
+//   res.render('trips');
+// });
 
-router.get('/trips', function(req, res, next) {
+// // GET TRIPS PAGE
 
-  res.render('trips')
-})
+// router.get('/trips', function(req, res, next) {
+
+//   res.render('trips')
+// })
 
 // GET HOME PAGE
 
@@ -89,5 +109,47 @@ router.get('/home', function(req, res, next) {
 
   res.render('home')
 })
+
+router.post('/sign-up', async function(req, res, next) {
+
+  var newUser = new userModel({
+    name: req.body.SUname,
+    firstname: req.body.SUfirstname,
+    email: req.body.SUemail,
+    password: req.body.SUpassword
+  })
+  
+  var alreadyMember = await userModel.findOne({
+    email: req.body.SUemail,
+  })
+
+  if (!alreadyMember) {
+    await newUser.save()
+    res.redirect('/home')
+  } else {
+    res.redirect('/')
+  }
+
+})
+
+router.post('/sign-in', async function(req, res, next) {
+
+  var registeredUser = await userModel.findOne({
+    email: req.body.SIemail,
+    password: req.body.SIpassword
+  })
+
+  if (registeredUser) {
+
+    var actualUser = await userModel.findOne({email: req.body.SIemail})
+    console.log('__ username', actualUser.name)
+
+    res.redirect('/home')
+  } else {
+    res.redirect('/')
+  }
+
+})
+
 
 module.exports = router;

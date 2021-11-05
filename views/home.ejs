@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta chartset = "UTF-8"/>
     <title>Ticketac</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
@@ -10,37 +9,24 @@
     
   </head>
   <body>
-
     <div class="container-fluid p-0">
+      <%- include('../public/partials/navbar'); %>
 
-      <%- include('../public/partials/navbar.ejs'); %> 
+      <div class="row col-6 offset-3 mb-5">
+        <h4 class="titleForm text-white">One-way ticket :</h4>
 
-    <div class="d-flex">
+        <form action="/result" method="POST" class="d-flex">
+              <input name="from" type="text" class="form-control p-2 m-2" aria-describedby="emailHelp" placeholder="From: Paris, Marseille...">
+              <input name="to" type="text" class="form-control p-2 m-2" placeholder="To: Lille, Nantes...">
+              <input name="date" type="date" class="form-control p-2 m-2"  min="2018-01-01" max="2018-12-31">
+          <button type="submit" class="btn btn-danger m-2">Go</button>
+        </form>
+      </div>
 
-      <div class="row">
-          <div class="row justify-content-center">
-              <div class="col-11 col-lg-7">
-                <h2>One-way ticket :</h2>
-              </div>
-         </div>
-    </div>
+      <div class="row-fluid text-center mt-5">
+        <img src="../images/landmark.png" alt="" height="300">
+      </div>
 
-      <div class="row justify-content-center">
-        <div class= "col-12 col-lg6">
-          <form action="/trips" method="POST">
-            <div class="from-row">
-              <input name="departure" type="text" class="form-control" placeholder="From: Paris, Marseille...">
-            </div>
-        <div class="col" id="datepicker">
-            <input name="date" type="text" class="form-control" id="datepicker">
-        </div>
-            
-            <button id="btn-search" type="submit" class="btn btn-danger">Go</button>  
-    </div>
-       </div>
-          </form>
-        </div>
-      
     </div>
   </body>
 </html>

@@ -6,12 +6,21 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var models = require('./routes/index')
+// var models = require('./routes/index')
+
+var session = require('express-session')
 
 require('./models/connection');
 
-
 var app = express();
+
+app.use(
+  session({
+    secret: 'crypto.randomBytes(20).toString("hex")',
+    resave: false,
+    saveUninitialized: false
+  })
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
