@@ -26,7 +26,9 @@
                     </div>
                     <div class="col-3 d-flex justify-content-end">
                         <h2 class="stylizedtexts m-1"><%= travelsAvailable[i].price %>€</h2>
-                        <button type="button" class="btn btn-danger m-1">OK</button>
+                        <a href="/orders?index=<%= i %> ">
+                            <button type="button" class="btn btn-danger m-1">OK</button>
+                        </a>
                     </div>
                 </div>
             </div>

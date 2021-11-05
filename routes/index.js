@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 var userModel = require('../models/users')
 var travelModel = require('../models/travels')
+var myTicketModel = require('../models/mytickets')
 
 var journeySchema = mongoose.Schema({
   departure: String,
@@ -78,7 +79,7 @@ router.get('/save', async function(req, res, next) {
 router.post('/result', async function(req, res, next) {
 
     req.session.from = req.body.from
-  var from = req.session.from
+  var Sfrom = req.session.from
     req.session.to = req.body.to
   var Sto = req.session.to
     req.session.date = req.body.date
@@ -99,8 +100,26 @@ router.post('/result', async function(req, res, next) {
 });
 
 router.get('/notfound', function(req, res, next) {
-
   res.render('notfound')
+})
+
+router.get('/orders', async function(req, res, next) {
+
+  var newTicket = new myTicketModel({
+    from: req.session.from,
+    to: req.session.to,
+    date: req.session.date,
+    departureTime: req.session.date,
+    price: 123
+  })
+
+  await newTicket.save()
+
+  res.render('orders', {
+    from: req.session.from,
+    to: req.session.to,
+    date: req.session.date,
+  })
 })
 
 //   res.render('trips');
