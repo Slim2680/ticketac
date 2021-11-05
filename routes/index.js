@@ -90,8 +90,18 @@ router.post('/result', async function(req, res, next) {
     date: Sdate
   })
 
-  res.render('trips', {travelsAvailable});
+  if (travelsAvailable.length === 0) {
+    res.redirect('/notfound')
+  } else {
+    res.render('trips', {travelsAvailable});
+  }
+
 });
+
+router.get('/notfound', function(req, res, next) {
+
+  res.render('notfound')
+})
 
 //   res.render('trips');
 // });
@@ -106,7 +116,6 @@ router.post('/result', async function(req, res, next) {
 // GET HOME PAGE
 
 router.get('/home', function(req, res, next) {
-//  console.log("Hellloooooooooo there!!!!!!")
   res.render('home')
 })
 
@@ -118,7 +127,7 @@ router.post('/sign-up', async function(req, res, next) {
     email: req.body.SUemail,
     password: req.body.SUpassword
   })
-  
+
   var alreadyMember = await userModel.findOne({
     email: req.body.SUemail,
   })
