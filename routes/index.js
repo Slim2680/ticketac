@@ -106,7 +106,7 @@ router.post('/result', async function(req, res, next) {
 // GET HOME PAGE
 
 router.get('/home', function(req, res, next) {
-
+//  console.log("Hellloooooooooo there!!!!!!")
   res.render('home')
 })
 
