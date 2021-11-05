@@ -78,7 +78,7 @@ router.get('/save', async function(req, res, next) {
 router.post('/result', async function(req, res, next) {
 
     req.session.from = req.body.from
-  var from = req.session.from
+  var Sfrom = req.session.from
     req.session.to = req.body.to
   var Sto = req.session.to
     req.session.date = req.body.date
